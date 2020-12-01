@@ -6,7 +6,7 @@
 #include "day1.hpp"
 using namespace day1;
 
-std::vector<std::string> get_input(const std::string filename)
+std::vector<std::string> get_input(const std::string& filename)
 {
     std::ifstream myFile(filename);
 

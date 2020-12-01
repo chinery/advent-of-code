@@ -1,7 +1,7 @@
 #include "day1.hpp"
 
 namespace day1 {
-    std::string runPart1(const std::vector<std::string> input) {
+    std::string runPart1(const std::vector<std::string>& input) {
         for(std::string line1 : input) {
             for(std::string line2 : input) {
                 int num1 = std::stoi(line1);
@@ -14,7 +14,7 @@ namespace day1 {
         return "";
     }
 
-    std::string runPart2(const std::vector<std::string> input) {
+    std::string runPart2(const std::vector<std::string>& input) {
         for(std::string line1 : input) {
             for(std::string line2 : input) {
                 int num1 = std::stoi(line1);
