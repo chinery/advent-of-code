@@ -3,9 +3,12 @@
 #include <algorithm>
 
 namespace day2 {
-    int process_and_count(const std::vector<std::string>& input, int part) {
+    int processAndCount(const std::vector<std::string>& input, int part) {
         int correctCount = 0;
         for(std::string line1 : input) {
+            // using getline rather than sscanf to parse string
+            // more lines but neatly handles variable length password
+
             std::stringstream lineStream(line1);
             int low, high;
             char ruleChar;
@@ -39,12 +42,12 @@ namespace day2 {
     }
 
     std::string runPart1(const std::vector<std::string>& input) {
-        int correctCount = process_and_count(input, 1);
+        int correctCount = processAndCount(input, 1);
         return std::to_string(correctCount);
     }
 
     std::string runPart2(const std::vector<std::string>& input) {
-        int correctCount = process_and_count(input, 2);
+        int correctCount = processAndCount(input, 2);
         return std::to_string(correctCount);
     }
 }
