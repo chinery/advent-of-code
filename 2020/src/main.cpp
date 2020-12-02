@@ -5,6 +5,7 @@
 
 #include "day2.hpp"
 using namespace day2;
+static const std::string filename = "../data/day2.txt";
 
 std::vector<std::string> get_input(const std::string& filename)
 {
@@ -21,7 +22,7 @@ std::vector<std::string> get_input(const std::string& filename)
 
 int main()
 {
-    std::vector input = get_input("../data/day" + DAY + ".txt");
+    std::vector input = get_input(filename);
     std::cout << runPart1(input) << std::endl;
 	// std::cout << runPart2(input) << std::endl;
 }
