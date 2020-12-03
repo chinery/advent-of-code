@@ -1,7 +1,8 @@
-#include <string>
-#include <vector>
-#include <iostream>
+#include "Solver.hpp"
 
-namespace day0 {
-    std::string runPart1(const std::vector<std::string>& input);
-}
+class Day0 : public Solver {
+public:
+    Day0();
+    std::string runPart1 (const std::vector<std::string>& input) override;
+    std::string runPart2(const std::vector<std::string>& input) override;
+};
