@@ -2,11 +2,11 @@
 #include <vector>
 #include <string>
 
-#include "day3.hpp"
+#include "day4.hpp"
 
 int main()
 {
-	Solver* solver = new Day3();
+	Solver* solver = new Day4();
     std::vector<std::string> input = solver->getInput();
     std::cout << solver->runPart1(input) << std::endl;
 	std::cout << solver->runPart2(input) << std::endl;
