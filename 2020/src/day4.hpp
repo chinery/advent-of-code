@@ -14,7 +14,7 @@ public:
 class Day4 : public Solver {
 public:
     Day4();
-    std::string runPart1 (const std::vector<std::string>& input) override;
+    std::string runPart1(const std::vector<std::string>& input) override;
     std::string runPart2(const std::vector<std::string>& input) override;
 private:
     std::vector<Passport> parseports(const std::vector<std::string>& input);
