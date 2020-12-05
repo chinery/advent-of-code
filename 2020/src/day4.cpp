@@ -54,7 +54,8 @@ bool Passport::isValid(bool strict) const {
  */
 Day4::Day4() : Solver("day4") {}
 
-void Day4::parseports(const std::vector<std::string>& input, std::vector<Passport>& list) {
+std::vector<Passport> Day4::parseports(const std::vector<std::string>& input) {
+    std::vector<Passport> list;
     Passport pass;
     for(std::string line : input) {
         if(line.empty()){
@@ -70,11 +71,11 @@ void Day4::parseports(const std::vector<std::string>& input, std::vector<Passpor
         }
     }
     list.push_back(pass);
+    return list;
 }
 
 std::string Day4::runPart1(const std::vector<std::string>& input) {
-    std::vector<Passport> list;
-    parseports(input, list);
+    std::vector<Passport> list = parseports(input);
     int countValid = std::count_if(list.begin(), list.end(), [](Passport const& p){
                return p.isValid();
             });
@@ -82,8 +83,7 @@ std::string Day4::runPart1(const std::vector<std::string>& input) {
 }
 
 std::string Day4::runPart2(const std::vector<std::string>& input) {
-    std::vector<Passport> list;
-    parseports(input, list);
+    std::vector<Passport> list = parseports(input);
     int countValid = std::count_if(list.begin(), list.end(), [](Passport const& p){
                return p.isValid(true);
             });
