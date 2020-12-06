@@ -8,7 +8,7 @@
         "name": "clang++ - Build and debug active file",
         "type": "cppdbg",
         "request": "launch",
-        "program": "${workspaceFolder}/bin/${fileBasenameNoExtension}",
+        "program": "${workspaceFolder}/bin/aoc20",
         "args": [],
         "stopAtEntry": false,
         "cwd": "${workspaceFolder}",
