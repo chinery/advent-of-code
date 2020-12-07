@@ -67,6 +67,7 @@
         "__tree": "cpp",
         "map": "cpp",
         "regex": "cpp",
-        "set": "cpp"
+        "set": "cpp",
+        "list": "cpp"
     }
 }
