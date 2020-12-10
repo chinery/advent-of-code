@@ -1,0 +1,62 @@
+#include <set>
+#include <iostream>
+#include <vector>
+#include <algorithm>
+// where old ideas go to die
+// this file not meant to be compiled, but #includes to make it readable without errors
+
+/*
+ * In day 10 the brute force approach obviously didn't work for part two, but was
+ * able to optimise by splitting the list each time there was a number 3-apart
+ * e.g.
+ *     [4 5 8 9 10]
+ * could be processed as
+ *     [4 5] * [8 9 10]
+ * 
+ * This worked to get the solution, but then discovered the dp approach which is much nicer.
+ */
+
+long countConfigs(const std::set<int>& jolts, std::set<int>::iterator start, std::set<int>::iterator end) {
+    if(start == end) {
+        return 1;
+    }
+    int jolt = *start;
+    long configs = countConfigs(jolts, ++start, end);
+
+    if(start != end) {
+        ++start;
+        if(start != end && *start <= jolt + 3) {
+            configs += countConfigs(jolts, start, end);
+
+            ++start;
+            if(start != end && *start <= jolt + 3) {
+                configs += countConfigs(jolts, start, end);
+            }
+        }
+    }
+    return configs;
+}
+
+long splitSetGetConfigs(const std::set<int>& jolts) {
+    std::vector<std::pair<std::set<int>::iterator, std::set<int>::iterator>> splits;
+
+    std::set<int>::iterator start = jolts.begin();
+    std::set<int>::iterator prev = jolts.begin();
+    std::set<int>::iterator it = std::next(jolts.begin());
+
+    while(it != jolts.end()) {
+        if(*prev + 3 == *it){
+            splits.push_back({start, it});
+            start = it;
+        }
+        prev = it;
+        ++it;
+    }
+
+    long total = 1;
+    for(auto& pair : splits) {
+        total *= countConfigs(jolts, pair.first, pair.second);
+    }
+
+    return total;
+}
