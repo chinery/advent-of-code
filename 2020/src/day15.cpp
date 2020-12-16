@@ -22,7 +22,6 @@ std::vector<std::string> Day15::getInput() {
 std::string run(const std::vector<std::string>& input, int stop) {
     std::vector<std::string> numbers = util::split(input[0], ',');
     std::unordered_map<int, int> lastSeen;
-    lastSeen.reserve(stop);
 
     int i = 1;
     int num;
