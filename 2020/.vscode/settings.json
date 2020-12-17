@@ -68,6 +68,7 @@
         "map": "cpp",
         "regex": "cpp",
         "set": "cpp",
-        "list": "cpp"
+        "list": "cpp",
+        "unordered_set": "cpp"
     }
 }
