@@ -3,11 +3,11 @@
 #include <string>
 #include <chrono>
 
-#include "day17.hpp"
+#include "day18.hpp"
 
 int main()
 {
-	Solver* solver = new Day17();
+	Solver* solver = new Day18();
     std::vector<std::string> input = solver->getInput();
 	auto start = std::chrono::high_resolution_clock::now();
 
