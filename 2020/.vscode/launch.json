@@ -8,14 +8,14 @@
         "name": "clang++ - Build and debug active file",
         "type": "cppdbg",
         "request": "launch",
-        "program": "${workspaceFolder}/bin/aoc20",
+        "program": "${workspaceFolder}/aoc20",
         "args": [],
         "stopAtEntry": false,
         "cwd": "${workspaceFolder}",
         "environment": [],
         "externalConsole": false,
         "MIMode": "lldb",
-        "preLaunchTask": "clang++ build active file"
+        // "preLaunchTask": "clang++ build active file"
       }
     ]
   }
