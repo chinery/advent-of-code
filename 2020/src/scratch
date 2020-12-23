@@ -241,3 +241,86 @@ long splitSetGetConfigs(const std::set<int>& jolts) {
 // std::string Day19::runPart2(const std::vector<std::string>& input) {
 //     return "";
 // }
+
+
+/*
+ * Day 23: my original solution was to maintain a linked list and a map to give efficient insert/delete plus
+ * efficient search. Ran in about 20 s. But I changed it to a flat array linked list: index of array is value
+ * of cup, value of array is the next clockwise cup.
+ */
+
+
+std::string Day23::runPart2(const std::vector<std::string>& input) {
+    std::list<int> cups;
+    std::unordered_map<int, std::list<int>::iterator> cupToPosition;
+
+    for(char c : input[0]) {
+        cupToPosition[c - '0'] = cups.insert(cups.end(), c - '0');
+    }
+
+    for(int i = 10; i <= 1000000; i++) {
+        cupToPosition[i] = cups.insert(cups.end(), i);
+    }
+
+    const int MAX = 1e6;
+
+    auto cupPtr = cups.begin();
+    int currentCup = *cupPtr;
+    auto currentCupPtr = cupPtr;
+
+    for(int turn = 0; turn < 1e7; turn++){
+        if(++cupPtr == cups.end()) {
+            cupPtr = cups.begin();
+        }
+        int pickedUp1 = *(cupPtr);
+        cupPtr = cups.erase(cupPtr);
+
+        if(cupPtr == cups.end()) {
+            cupPtr = cups.begin();
+        }
+        int pickedUp2 = *(cupPtr);
+        cupPtr = cups.erase(cupPtr);
+
+        if(cupPtr == cups.end()) {
+            cupPtr = cups.begin();
+        }
+        int pickedUp3 = *(cupPtr);
+        cupPtr = cups.erase(cupPtr);
+        
+        int destination = currentCup - 1;
+        while(destination == pickedUp1 || destination == pickedUp2 || destination == pickedUp3 || destination == 0) {
+            if(destination == 0) {
+                destination = MAX;
+            } else {
+                destination--;
+            }
+        }
+
+        cupPtr = cupToPosition[destination];
+
+        ++cupPtr;
+
+        cupToPosition[pickedUp1] = cups.insert(cupPtr, pickedUp1);
+        cupToPosition[pickedUp2] = cups.insert(cupPtr, pickedUp2);
+        cupToPosition[pickedUp3] = cups.insert(cupPtr, pickedUp3);
+
+        if(++currentCupPtr == cups.end()) {
+            currentCupPtr = cups.begin();
+        }
+        cupPtr = currentCupPtr;
+        currentCup = *cupPtr;
+    }
+
+    cupPtr = cupToPosition[1];
+    if(++cupPtr == cups.end()) {
+        cupPtr = cups.begin();
+    }
+    long result = *cupPtr;
+
+    if(++cupPtr == cups.end()) {
+        cupPtr = cups.begin();
+    }
+    result *= *cupPtr;
+
+    return std::to_string(result);
+}

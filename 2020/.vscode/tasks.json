@@ -35,7 +35,11 @@
 			"command": "./aoc20",
 			"problemMatcher": [
 				"$gcc"
-			]
+			],
+			"group": {
+				"kind": "test",
+				"isDefault": true
+			}
 		}
 	]
   }
