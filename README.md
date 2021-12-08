@@ -7,4 +7,6 @@ For 2018 and 2019 my input for each puzzle is stored in a text file with the sam
 
 For 2020 I am using C++. Inputs are stored in the data subfolder. There is a .vscode folder set up with the build task using clang.
 
+For 2021 I am using Swift. Inputs are stored in each day's subfolder and read in using an ugly absolute path rather than having to add each file to the Xcode build each day. You'd need to update that to get it to run.
+
 Enjoy!
