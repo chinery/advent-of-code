@@ -2,7 +2,7 @@ import Foundation
 
 let start = mach_absolute_time()
 
-day1_2()
+day2_2()
 
 let end = mach_absolute_time()
 

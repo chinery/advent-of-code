@@ -10,6 +10,7 @@
 		494627E02760B38000FCD687 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494627DF2760B38000FCD687 /* main.swift */; };
 		494627E72760B3D700FCD687 /* day1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494627E62760B3D700FCD687 /* day1.swift */; };
 		494627EB2760B45900FCD687 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494627EA2760B45900FCD687 /* Utils.swift */; };
+		494627EF2760BFAC00FCD687 /* day2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494627EE2760BFAC00FCD687 /* day2.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -29,6 +30,7 @@
 		494627DF2760B38000FCD687 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		494627E62760B3D700FCD687 /* day1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = day1.swift; sourceTree = "<group>"; };
 		494627EA2760B45900FCD687 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		494627EE2760BFAC00FCD687 /* day2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = day2.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 			children = (
 				494627E92760B44D00FCD687 /* Utils */,
 				494627E82760B41F00FCD687 /* Day 1 */,
+				494627ED2760BFA400FCD687 /* Day 2 */,
 				494627DF2760B38000FCD687 /* main.swift */,
 			);
 			path = AoC2021;
@@ -82,6 +85,14 @@
 				494627EA2760B45900FCD687 /* Utils.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		494627ED2760BFA400FCD687 /* Day 2 */ = {
+			isa = PBXGroup;
+			children = (
+				494627EE2760BFAC00FCD687 /* day2.swift */,
+			);
+			path = "Day 2";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -143,6 +154,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				494627E02760B38000FCD687 /* main.swift in Sources */,
+				494627EF2760BFAC00FCD687 /* day2.swift in Sources */,
 				494627E72760B3D700FCD687 /* day1.swift in Sources */,
 				494627EB2760B45900FCD687 /* Utils.swift in Sources */,
 			);
