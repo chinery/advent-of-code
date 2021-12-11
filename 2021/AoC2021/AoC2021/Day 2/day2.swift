@@ -2,8 +2,7 @@ import Foundation
 import simd
 
 private func getInput(file: String) -> [simd_int2] {
-    let baseUrl = URL(fileURLWithPath: "/Users/andrew/dev/advent-of-code/2021/AoC2021/AoC2021/Day 2/")
-    let url = baseUrl.appendingPathComponent(file)
+    let url = Config.baseUrl.appendingPathComponent("Day 2/").appendingPathComponent(file)
     let strings = Utils.readLines(url: url)
     
     return strings.map {$0.split(separator: " ")}

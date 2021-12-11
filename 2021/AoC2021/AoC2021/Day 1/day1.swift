@@ -1,8 +1,7 @@
 import Foundation
 
 private func getInput(file: String) -> [Int] {
-    let baseUrl = URL(fileURLWithPath: "/Users/andrew/dev/advent-of-code/2021/AoC2021/AoC2021/Day 1/")
-    let url = baseUrl.appendingPathComponent(file)
+    let url = Config.baseUrl.appendingPathComponent("Day 1/").appendingPathComponent(file)
     let strings = Utils.readLines(url: url)
     
     return strings.map {Int($0)!}
