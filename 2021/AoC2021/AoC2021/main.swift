@@ -6,7 +6,7 @@ class Config {
 
 let start = mach_absolute_time()
 
-day6_2()
+day8_2()
 
 let end = mach_absolute_time()
 

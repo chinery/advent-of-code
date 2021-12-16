@@ -17,6 +17,8 @@
 		49F5658927689F9B005C9146 /* day5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F5658827689F9B005C9146 /* day5.swift */; };
 		49F5658F2768CEB6005C9146 /* day6.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F5658E2768CEB6005C9146 /* day6.swift */; };
 		49F565922768CEED005C9146 /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = 49F565912768CEED005C9146 /* Collections */; };
+		49F565952768D58B005C9146 /* day7.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F565942768D58B005C9146 /* day7.swift */; };
+		49F565982769E547005C9146 /* day8.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F565972769E547005C9146 /* day8.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -42,6 +44,8 @@
 		49F565862767C390005C9146 /* CGPoint+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+Extensions.swift"; sourceTree = "<group>"; };
 		49F5658827689F9B005C9146 /* day5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = day5.swift; sourceTree = "<group>"; };
 		49F5658E2768CEB6005C9146 /* day6.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = day6.swift; sourceTree = "<group>"; };
+		49F565942768D58B005C9146 /* day7.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = day7.swift; sourceTree = "<group>"; };
+		49F565972769E547005C9146 /* day8.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = day8.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +86,8 @@
 				49F565802764F530005C9146 /* Day 4 */,
 				49F565832767B670005C9146 /* Day 5 */,
 				49F5658D2768CEA5005C9146 /* Day 6 */,
+				49F565932768D580005C9146 /* Day 7 */,
+				49F565962769E53A005C9146 /* Day 8 */,
 				494627DF2760B38000FCD687 /* main.swift */,
 			);
 			path = AoC2021;
@@ -142,6 +148,22 @@
 				49F5658E2768CEB6005C9146 /* day6.swift */,
 			);
 			path = "Day 6";
+			sourceTree = "<group>";
+		};
+		49F565932768D580005C9146 /* Day 7 */ = {
+			isa = PBXGroup;
+			children = (
+				49F565942768D58B005C9146 /* day7.swift */,
+			);
+			path = "Day 7";
+			sourceTree = "<group>";
+		};
+		49F565962769E53A005C9146 /* Day 8 */ = {
+			isa = PBXGroup;
+			children = (
+				49F565972769E547005C9146 /* day8.swift */,
+			);
+			path = "Day 8";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -212,10 +234,12 @@
 				49F565822764F544005C9146 /* day4.swift in Sources */,
 				49F565872767C390005C9146 /* CGPoint+Extensions.swift in Sources */,
 				494627EF2760BFAC00FCD687 /* day2.swift in Sources */,
+				49F565982769E547005C9146 /* day8.swift in Sources */,
 				494627E72760B3D700FCD687 /* day1.swift in Sources */,
 				49F5657F2764E7F7005C9146 /* day3.swift in Sources */,
 				494627EB2760B45900FCD687 /* Utils.swift in Sources */,
 				49F5658F2768CEB6005C9146 /* day6.swift in Sources */,
+				49F565952768D58B005C9146 /* day7.swift in Sources */,
 				49F5658927689F9B005C9146 /* day5.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

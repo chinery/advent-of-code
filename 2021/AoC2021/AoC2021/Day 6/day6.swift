@@ -6,7 +6,6 @@ private func getInput(file: String = "input.txt") -> [Int] {
     let url = Config.baseUrl.appendingPathComponent("Day 6/").appendingPathComponent(file)
     let strings = Utils.readLines(url: url)
     
-    
     return strings[0].split(separator: ",").map {Int($0)!}
 }
 
