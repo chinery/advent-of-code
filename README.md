@@ -1,12 +1,15 @@
 # Advent of code
+
 This is a place to store my solutions for the yearly [Advent of Code](https://adventofcode.com/) programming puzzles. At least, as far as I get each year before work commitments mean I can't keep up! One year I'll do the full thing (update: 2020 was the first, all 25 complete!)
 
-I am by no means competitive on the global leaderboard because I do not want to wake up at 5am. The code is just for fun and not perfect, but if you want to see a bit of how my brain works, go ahead!
+~~I am by no means competitive on the global leaderboard because I do not want to wake up at 5am.~~ (edit: now there is no global leaderboard anyway!) The code is just for fun and not perfect, but if you want to see a bit of how my brain works, go ahead!
 
 For 2018 and 2019 my input for each puzzle is stored in a text file with the same name as the question, which I read in by redirecting stdin. Written in Python 3.
 
 For 2020 I am using C++. Inputs are stored in the data subfolder. There is a .vscode folder set up with the build task using clang.
 
 For 2021 I am using Swift. Inputs are stored in each day's subfolder and read in using an ugly absolute path rather than having to add each file to the Xcode build each day. You'd need to update that to get it to run.
+
+I'm back after a hiatus in 2025. I'm planning to pick a different language each day – let's see how well that goes...
 
 Enjoy!
