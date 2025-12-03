@@ -4,11 +4,11 @@ class Config {
     static let baseUrl = URL(fileURLWithPath: "/Users/andrew/dev/advent-of-code/2021/AoC2021/AoC2021/")
 }
 
-let start = mach_absolute_time()
+let start = ProcessInfo.processInfo.systemUptime
 
-day8_2()
+day13_1()
 
-let end = mach_absolute_time()
+let end = ProcessInfo.processInfo.systemUptime
 
 print()
-print("Ran in \(Double(end - start) / Double(NSEC_PER_SEC)) seconds")
+print("Ran in \(Double(end - start)) seconds")
