@@ -5,12 +5,20 @@ string filename = "3.txt";
 BatteryBankScanner scanner = new(filename);
 Console.WriteLine($"{scanner.SumLargestJoltagePart2(12)}");
 
+// var stopwatch = System.Diagnostics.Stopwatch.StartNew();
+// for (int i = 1; i < 101; i++)
+// {
+//     stopwatch.Restart();
+//     Console.WriteLine($"{scanner.SumLargestJoltagePart2(i)}");
+//     stopwatch.Stop();
+
+//     Console.WriteLine($"{i} execution time: {stopwatch.ElapsedMilliseconds} ms");
+// }
+
 class BatterySelection
 {
     private static readonly int MAX_BATTERY = 9;
     private readonly int[] onBatteries;
-    private int LowestBattery { get; set; } = MAX_BATTERY + 1;
-    private int LowestIndex { get; set; } = 0;
 
     private int RightIsBiggerIndex { get; set; }
     private bool RightIsBiggerExists { get { return RightIsBiggerIndex <= onBatteries.Length; } }
@@ -31,11 +39,6 @@ class BatterySelection
     private void SetBattery(int i, int battery)
     {
         onBatteries[i] = battery;
-        if (battery < LowestBattery)
-        {
-            LowestBattery = battery;
-            LowestIndex = i;
-        }
         if (i > 0 && i < RightIsBiggerIndex && onBatteries[i - 1] < onBatteries[i])
         {
             RightIsBiggerIndex = i - 1;
@@ -48,32 +51,18 @@ class BatterySelection
         {
             AddNewBattery(RightIsBiggerIndex, newBattery);
         }
-        else if (newBattery >= LowestBattery)
+        else if (newBattery > onBatteries[^1])
         {
-            AddNewBattery(LowestIndex, newBattery);
+            SetBattery(onBatteries.Length - 1, newBattery);
         }
     }
     private void AddNewBattery(int indexTurnOff, int newBattery)
-    {
-        // re-init these so they'll be set correctly for new data
+    { 
+        // re-init so it's set correctly for new data
         if (indexTurnOff <= RightIsBiggerIndex)
         {
             RightIsBiggerIndex = onBatteries.Length + 1;
         }
-        if (indexTurnOff <= LowestIndex)
-        {
-            // SetBattery will be called for every value for all 
-            // indices >= `indexTurnOff` (which will update lowest)
-
-            // we don't need to worry that there's some value to the left of `indexTurnOff`
-            // that is lower, because AddNewBattery is only ever called for LowestIndex or
-            // RightIsBiggerIndex, and both are the leftmost indicies for their respective
-            // conditions 
-
-            // so if RightIsBiggerIndex = 5, then Right Is Lower Or Equal for 0-4 :)
-            LowestBattery = MAX_BATTERY + 1;
-        }
-
         for (int i = indexTurnOff; i < onBatteries.Length - 1; i++)
         {
             SetBattery(i, onBatteries[i + 1]);
@@ -111,16 +100,21 @@ class BatteryBank(string batteries)
 
     public BigInteger LargestJoltagePart2(int digits)
     {
+        // initialise selection with first 12 digits
+        BatterySelection selection = new(batteries[..digits]);
+
         /*
-            if any digit has a value > than it to the right
+            for each remaining digit
+
+            if any selected digit has a value > than it to the right
             turn off the leftmost digit that has something bigger to the right
+            add the new digit to the end
 
             else...
             if the new digit is higher or equal lowest, add it to the end, turn off lowest leftmost
-        */
 
-        // initialise selection with first 12 digits
-        BatterySelection selection = new(batteries[..digits]);
+            and if there's no digit that has something bigger to the right, then the rightmost must be least
+        */
 
         for (int i = digits; i < batteries.Length; i++)
         {
