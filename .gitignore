@@ -8,3 +8,6 @@
 2025/2/node_modules
 2025/2/package-lock.json
 **/launch.json
+**/__pycache__/*
+
+2025/5/target/
