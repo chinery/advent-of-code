@@ -1,7 +1,6 @@
 use std::fs::File;
-use std::io;
+use std::{cmp, io};
 use std::io::prelude::*;
-use std::collections::HashSet;
 
 #[derive(Debug, Clone, Copy)]
 struct Range {
@@ -69,30 +68,17 @@ fn part_two(filename: &str) {
     ranges.sort_by_key(|a| a.start);
 
     let mut fresh_count: i64 = 0;
-    let mut ranges_to_ignore= HashSet::new();
+    let Range {start: mut running_start, end: mut running_end} = ranges[0];
 
-    for i in 0..ranges.len() {
-        if ranges_to_ignore.contains(&i) {continue;}
-
-        let range = ranges[i];
-        let start = range.start;
-        let mut end = range.end;
-
-        // check if this range overlaps any subsequent ones
-        for j in i+1..ranges.len() {
-            let next_range = ranges[j];
-            if end < next_range.start {break;}
-            else if end < next_range.end {
-                // if partial overlap - truncate this range
-                end = next_range.start-1;
-                break;
-            } else {
-                // if full overlap - ignore the subsumed range
-                ranges_to_ignore.insert(j);
-            }
+    for i in 1..ranges.len() {
+        let Range {start: next_start, end: next_end} = ranges[i];
+        if next_start > running_end {
+            fresh_count += running_end - running_start + 1;
+            (running_start, running_end) = (next_start, next_end);
         }
-        
-        fresh_count += end - start + 1;
+        else {
+            running_end = cmp::max(running_end, next_end);
+        }
     }
 
     println!("Part two fresh: {}", fresh_count);
@@ -104,7 +90,7 @@ fn main() {
     let start = std::time::Instant::now();
     part_one(filename);
     println!("\telapsed: {:?}", start.elapsed());
-    
+
     let start = std::time::Instant::now();
     part_two(filename);
     println!("\telapsed: {:?}", start.elapsed());
