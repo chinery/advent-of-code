@@ -1,0 +1,183 @@
+from gpu.host import DeviceContext
+from sys import has_accelerator
+
+def rect_area(a: SIMD[DType.int64, 2], b: SIMD[DType.int64, 2]) -> Int64:
+    delta = abs(a-b) + 1
+    return delta[0] * delta[1]
+
+def get_tiles(filename: String) -> List[SIMD[DType.int64, 2]]:
+    with open(filename, "r") as file:
+        data = file.read()
+        lines = data.splitlines()
+    
+    tiles: List[SIMD[DType.int64, 2]] = []
+    for line in lines:
+        tile = line.split(",")
+        tiles.append(SIMD[DType.int64, 2](atol(tile[0]), atol(tile[1])))
+    
+    return tiles^
+
+def part1(tiles: List[SIMD[DType.int64, 2]]):
+    biggest: Int64 = 0
+    for i in range(len(tiles)):
+        for j in range(i+1, len(tiles)):
+            size = rect_area(tiles[i], tiles[j])
+            if size > biggest:
+                biggest = size
+
+    print(biggest)
+
+# def direction(point: SIMD[DType.int64, 2], prev: SIMD[DType.int64, 2], next: SIMD[DType.int64, 2]):
+
+    
+def part2(tiles: List[SIMD[DType.int64, 2]]):
+    min_ix = 0
+    min_tile = tiles[0]
+    for i in range(1, len(tiles)):
+        if (tiles[i][0] < min_tile[0] or
+           (tiles[i][0] == min_tile[0] and tiles[i][1] < min_tile[1])):
+            min_ix = i
+            min_tile = tiles[i]
+
+    # hmm I know I need to use some better data structure here, but
+    # let's just try to get something that works
+    directions = List[SIMD[DType.bool, 2]](capacity=len(tiles))
+    is_inner_corner = List[Bool](capacity=len(tiles))
+
+    point = min_tile
+    ptr = min_ix
+
+    next_ptr = (ptr + 1) % len(tiles)
+    next_point = tiles[next_ptr]
+
+    if next_point.ne(point) != [True, False]:
+        raise Error("Input is not clockwise -- needs reversing")
+
+    direction: SIMD[DType.bool, 2] = [True, True]
+    directions[min_ix] = direction
+    is_inner_corner[min_ix] = True
+    
+    # print(min_tile, direction, True)
+
+    ptr = (ptr + 1) % len(tiles)
+    next_ptr = (next_ptr + 1) % len(tiles)
+    point = tiles[ptr]
+    next_point = tiles[next_ptr]
+
+    first = True
+
+    # dim alternates between 0 and 1 - indicates which dim of the points to check next 
+    # (as the points alternate between horizontal and vertical)
+    dim = 1
+    next_direction = True
+    while first or ptr - 1 != min_ix:
+        first = False
+
+        this_direction = next_direction
+        next_direction = next_point[dim] > point[dim]
+
+        # turning right:
+        # up(1-), right(0+) / right(0+), down(1+) / down(1+), left(0-) / left(0-), up(1-)
+
+        # direction:
+        # if moving up (next), the shape is to the right
+        #           down, left
+        #           right, down
+        #           left, up 
+        if dim == 1:
+            turning_right = this_direction == next_direction
+            direction[0] = not next_direction
+        else:
+            turning_right = this_direction != next_direction
+            direction[1] = next_direction
+
+
+        is_inner_corner[ptr] = turning_right
+        directions[ptr] = [direction[0], direction[1]]
+
+        # print(point, directions[ptr], is_inner_corner[ptr])
+
+        dim = 1-dim
+        ptr = (ptr + 1) % len(tiles)
+        next_ptr = (next_ptr + 1) % len(tiles)
+        point = tiles[ptr]
+        next_point = tiles[next_ptr]
+
+    biggest: Int64 = 0
+    for i in range(len(tiles)):
+        tile_i = tiles[i]
+        direction_i = directions[i]
+        inner_i = is_inner_corner[i]
+
+        for j in range(i+1, len(tiles)):
+            tile_j = tiles[j]
+            direction_j = directions[j]
+            inner_j = is_inner_corner[j]
+
+            # two tiles are valid if:
+            #   they can "see" each other
+            relation_i = direction_i.eq(~tile_j.lt(tile_i))
+            relation_j = direction_j.eq(~tile_i.lt(tile_j))
+
+            if inner_i:
+                test1 = relation_i.reduce_and()
+            else:
+                test1 = relation_i.reduce_or()
+
+            if inner_j:
+                test2 = relation_j.reduce_and()
+            else:
+                test2 = relation_j.reduce_or()
+
+            if test1 and test2:
+                # and check there's no other LINE! in the way
+                min_x = min(tile_i[0], tile_j[0])
+                max_x = max(tile_i[0], tile_j[0])
+                min_y = min(tile_i[1], tile_j[1])
+                max_y = max(tile_i[1], tile_j[1])
+
+                obstructed = False
+                
+                for k in range(0, len(tiles)):
+                    tile_k = tiles[k]
+
+                    if not (tile_k[0] <= min_x or tile_k[0] >= max_x
+                        or tile_k[1] <= min_y or tile_k[1] >= max_y):
+                        obstructed = True
+                        break
+
+                    if k == 0:
+                        continue
+
+                    tile_k_minus_one = tiles[k-1]
+                    if (tile_k[0] == tile_k_minus_one[0] 
+                       and min_x < tile_k[0] < max_x):
+                        line_y_min = min(tile_k[1], tile_k_minus_one[1])
+                        line_y_max = max(tile_k[1], tile_k_minus_one[1])
+                        if not (line_y_max <= min_y or line_y_min >= max_y):
+                            obstructed = True
+                            break
+                    elif (tile_k[1] == tile_k_minus_one[1]
+                          and min_y < tile_k[1] < max_y):
+                        line_x_min = min(tile_k[0], tile_k_minus_one[0])
+                        line_x_max = max(tile_k[0], tile_k_minus_one[0])
+                        if not (line_x_max <= min_x or line_x_min >= max_x):
+                            obstructed = True
+                            break
+
+                if not obstructed:
+                    size = rect_area(tiles[i], tiles[j])
+
+                    if size > biggest:
+                        biggest = size
+
+    print(biggest)
+        
+
+def main():
+    filename = "9.txt"
+    tiles = get_tiles(filename)
+
+    part1(tiles)
+    part2(tiles)
+

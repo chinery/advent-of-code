@@ -1,0 +1,11 @@
+[workspace]
+authors = ["Andrew Chinery <andrewchinery@gmail.com>"]
+channels = ["https://conda.modular.com/max-nightly", "conda-forge"]
+name = "9"
+platforms = ["osx-arm64"]
+version = "0.1.0"
+
+[tasks]
+
+[dependencies]
+mojo = ">=0.26.1.0.dev2025120805,<0.27"
