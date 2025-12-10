@@ -17,3 +17,7 @@
 **/*.dSYM/
 **/.vscode
 **/bin
+
+# pixi environments
+**/.pixi/*
+**/!.pixi/config.toml
