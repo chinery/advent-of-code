@@ -21,3 +21,13 @@
 # pixi environments
 **/.pixi/*
 **/!.pixi/config.toml
+
+.DS_Store
+**/.build
+**/Packages
+**/xcuserdata/
+**/DerivedData/
+**/.swiftpm/configuration/registries.json
+**/.swiftpm/xcode/package.xcworkspace/contents.xcworkspacedata
+**/.netrc
+2025/10/Package.resolved
