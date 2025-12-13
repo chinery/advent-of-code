@@ -1,0 +1,35 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    mechanize (1.0.0)
+      nokogiri (>= 1.2.1)
+    nokogiri (1.18.10-aarch64-linux-gnu)
+      racc (~> 1.4)
+    nokogiri (1.18.10-arm64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.18.10-x86_64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.18.10-x86_64-linux-gnu)
+      racc (~> 1.4)
+    racc (1.8.1)
+    sorbet (0.6.12845)
+      sorbet-static (= 0.6.12845)
+    sorbet-runtime (0.6.12845)
+    sorbet-static (0.6.12845-aarch64-linux)
+    sorbet-static (0.6.12845-universal-darwin)
+    sorbet-static (0.6.12845-x86_64-linux)
+    watchman (0.1.1)
+      mechanize (= 1.0.0)
+
+PLATFORMS
+  aarch64-linux
+  universal-darwin
+  x86_64-linux
+
+DEPENDENCIES
+  sorbet
+  sorbet-runtime
+  watchman (~> 0.1.1)
+
+BUNDLED WITH
+   2.6.9
